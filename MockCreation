@@ -1,0 +1,68 @@
+Next user: test4
+
+# Flow:
+## Get session token.
+POST /register
+    {"auth":{},"username":"test2","password":"qzp3m4bcj","bind_email":true,"bind_msisdn":true,"x_show_msisdn":true}
+Response 401
+    {"session":"xWwRALOetWLtbdgdwcdudCWB","params":{},"flows":[{"stages":["m.login.dummy"]},{"stages":["m.login.email.identity"]},{"stages":["m.login.msisdn"]},{"stages":["m.login.msisdn","m.login.email.identity"]}]}
+
+## Actual registration.
+POST /register
+    {"auth":{"session":"xWwRALOetWLtbdgdwcdudCWB","type":"m.login.dummy"},"username":"test2","password":"qzp3m4bcj","bind_email":true,"bind_msisdn":true,"x_show_msisdn":true}
+Response 200
+    {"access_token":"MDAyMGxvY2F0aW9uIG1hdHJpeC5mYXN0Y29pbi5jaAowMDEzaWRlbnRpZmllciBrZXkKMDAxMGNpZCBnZW4gPSAxCjAwMmNjaWQgdXNlcl9pZCA9IEB0ZXN0MjptYXRyaXguZmFzdGNvaW4uY2gKMDAxNmNpZCB0eXBlID0gYWNjZXNzCjAwMjFjaWQgbm9uY2UgPSBZLkJFZXVBNlBYeXJxZkkxCjAwMmZzaWduYXR1cmUg9jG6AWwUNjyssrPI0273U0RMrxpVfbXRQ2MFyu-26uUK"
+    ,"home_server":"matrix.fastcoin.ch"
+    ,"user_id":"@test2:matrix.fastcoin.ch"
+    ,"device_id":"HJBLWZEDSR"
+    }
+
+## Set presence
+PUT /status?access_token=...
+    {"presence":"online"}
+
+	curl 'https://matrix.fastcoin.ch/_matrix/client/r0/presence/%40test3%3Amatrix.fastcoin.ch/status?access_token=MDAyMGxvY2F0aW9uIG1hdHJpeC5mYXN0Y29pbi5jaAowMDEzaWRlbnRpZmllciBrZXkKMDAxMGNpZCBnZW4gPSAxCjAwMmNjaWQgdXNlcl9pZCA9IEB0ZXN0MzptYXRyaXguZmFzdGNvaW4uY2gKMDAxNmNpZCB0eXBlID0gYWNjZXNzCjAwMjFjaWQgbm9uY2UgPSBEX29USkJvRGJCPW1jUVUyCjAwMmZzaWduYXR1cmUg5gCJ2SuFMMvcBFqYqgyYdSGGw5AMQjSDUoPtJ8yjfCEK' -X PUT -H 'Host: matrix.fastcoin.ch' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Referer: https://riot.im/develop/' -H 'Content-Type: text/plain;charset=UTF-8' -H 'Origin: https://riot.im' -H 'DNT: 1' -H 'Connection: keep-alive' --data '{"presence":"online"}'
+
+## Set display name
+PUT /displayname?access_token=...
+    {"displayname":"test2"}
+
+# Join group
+POST join/
+```
+curl 'https://matrix.fastcoin.ch/_matrix/client/r0/join/%23medics%3Amatrix.fastcoin.ch?access_token=MDAyMGxvY2F0aW9uIG1hdHJpeC5mYXN0Y29pbi5jaAowMDEzaWRlbnRpZmllciBrZXkKMDAxMGNpZCBnZW4gPSAxCjAwMmNjaWQgdXNlcl9pZCA9IEB0ZXN0MzptYXRyaXguZmFzdGNvaW4uY2gKMDAxNmNpZCB0eXBlID0gYWNjZXNzCjAwMjFjaWQgbm9uY2UgPSBEX29USkJvRGJCPW1jUVUyCjAwMmZzaWduYXR1cmUg5gCJ2SuFMMvcBFqYqgyYdSGGw5AMQjSDUoPtJ8yjfCEK'
+```
+
+# Join room
+```
+curl 'https://matrix.fastcoin.ch/_matrix/client/r0/join/!utsTNYpYkcaRArpijJ%3Amatrix.fastcoin.ch?access_token=MDAyMGxvY2F0aW9uIG1hdHJpeC5mYXN0Y29pbi5jaAowMDEzaWRlbnRpZmllciBrZXkKMDAxMGNpZCBnZW4gPSAxCjAwMmNjaWQgdXNlcl9pZCA9IEB0ZXN0MzptYXRyaXguZmFzdGNvaW4uY2gKMDAxNmNpZCB0eXBlID0gYWNjZXNzCjAwMjFjaWQgbm9uY2UgPSBEX29USkJvRGJCPW1jUVUyCjAwMmZzaWduYXR1cmUg5gCJ2SuFMMvcBFqYqgyYdSGGw5AMQjSDUoPtJ8yjfCEK' -H 'Host: matrix.fastcoin.ch' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Referer: https://riot.im/develop/' -H 'Content-Type: text/plain;charset=UTF-8' -H 'Origin: https://riot.im' -H 'DNT: 1' -H 'Connection: keep-alive' --data '{}'
+```
+
+# Send message to room
+```
+curl 'https://matrix.fastcoin.ch/_matrix/client/r0/rooms/!DkkvvsgFsdApUEIHdJ%3Amatrix.fastcoin.ch/send/m.room.message/m1507406029186.2?access_token=MDAyMGxvY2F0aW9uIG1hdHJpeC5mYXN0Y29pbi5jaAowMDEzaWRlbnRpZmllciBrZXkKMDAxMGNpZCBnZW4gPSAxCjAwMmNjaWQgdXNlcl9pZCA9IEB0ZXN0MzptYXRyaXguZmFzdGNvaW4uY2gKMDAxNmNpZCB0eXBlID0gYWNjZXNzCjAwMjFjaWQgbm9uY2UgPSBEX29USkJvRGJCPW1jUVUyCjAwMmZzaWduYXR1cmUg5gCJ2SuFMMvcBFqYqgyYdSGGw5AMQjSDUoPtJ8yjfCEK' -X PUT -H 'Host: matrix.fastcoin.ch' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Referer: https://riot.im/develop/' -H 'Content-Type: text/plain;charset=UTF-8' -H 'Origin: https://riot.im' -H 'DNT: 1' -H 'Connection: keep-alive' --data '{"msgtype":"m.text","body":"Aaaaahh"}'
+```
+
+# Create room
+```
+curl 'https://matrix.fastcoin.ch/_matrix/client/r0/createRoom?access_token=MDAyMGxvY2F0aW9uIG1hdHJpeC5mYXN0Y29pbi5jaAowMDEzaWRlbnRpZmllciBrZXkKMDAxMGNpZCBnZW4gPSAxCjAwMmNjaWQgdXNlcl9pZCA9IEB0ZXN0MzptYXRyaXguZmFzdGNvaW4uY2gKMDAxNmNpZCB0eXBlID0gYWNjZXNzCjAwMjFjaWQgbm9uY2UgPSBEX29USkJvRGJCPW1jUVUyCjAwMmZzaWduYXR1cmUg5gCJ2SuFMMvcBFqYqgyYdSGGw5AMQjSDUoPtJ8yjfCEK'
+-H 'Host: matrix.fastcoin.ch'
+-H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0'
+-H 'Accept: */*'
+-H 'Accept-Language: en-US,en;q=0.5' --compressed
+-H 'Referer: https://riot.im/develop/'
+-H 'Content-Type: text/plain;charset=UTF-8'
+-H 'Origin: https://riot.im'
+-H 'DNT: 1'
+-H 'Connection: keep-alive' 
+--data '{"name":"test3-room2","preset":"private_chat","visibility":"private","initial_state":[{"content":{"guest_access":"can_join"},"type":"m.room.guest_access","state_key":""}]}'
+{
+  "preset": "public_chat",
+  "room_alias_name": "thepub",
+  "name": "The Grand Duke Pub",
+  "topic": "All about happy hour",
+  "creation_content": {
+      "m.federate": true
+  }
+}
+```
