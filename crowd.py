@@ -61,6 +61,8 @@ class UserLink:
         displayname_endpoint = self.homeserver_url + "/_matrix/client/r0/profile/" + self.user_id + "/displayname"
         self.lastr = requests.put(displayname_endpoint, params={"access_token":self.access_token}, json={"displayname":display_name})
 
+        print("Created user " + username)
+
         return self
 
     def tryLoginElseRegister(self, username, password=None):
@@ -105,11 +107,12 @@ class UserLink:
         if room_id.find("#") != 0:
             print("Invalid room_id: format #room_id:" + self.homeserver)
             return self
-        room_name = room_name
         if room_topic is None:
             room_topic = room_name
         self.last_room = room_id + self.homeserver
         ## Dirty hack to prevent python-requests from splitting my url.
+        room_id = room_id.split("#")[1].split(":")[0]
+        print("Create_room: " + room_name + " >> " + room_id)
         room_id = urllib.parse.quote(room_id)
         endpoint= self.homeserver_url + "/_matrix/client/r0/createRoom"
         data = {
@@ -172,13 +175,13 @@ class ScriptRoller:
         for l in discussion:
             l = l.strip()
             if l.find("#") == 0:
-                room_name = l
+                room_name = l.split("#")[1]
                 topic = room_name
                 if room_name.find(":")>0:
                     topic = room_name.split(":")[1]
                     room_name = room_name.split(":")[0].strip()
                 admin = self.users[self.admin]
-                room_id = room_name.lower().replace(" ","_").strip() + ":" + admin.homeserver
+                room_id = "#" + room_name.lower().replace(" ","_").strip() + ":" + admin.homeserver
                 admin.createRoom(room_name, room_id, topic)
                 self.last_room = room_id
             elif l.find("@") == 0:
