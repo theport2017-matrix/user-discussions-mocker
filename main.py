@@ -12,7 +12,7 @@ def help_message():
 
 def run_script(filename):
     print(filename)
-    user_link = UserLink().tryLoginElseRegister("test-auto-28")
+    user_link = UserLink().tryLoginElseRegister("nicolatesla")
     script_roller = ScriptRoller(user_link)
     script_roller.rollfile(filename)
 
