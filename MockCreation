@@ -55,7 +55,22 @@ curl 'https://matrix.fastcoin.ch/_matrix/client/r0/createRoom?access_token=MDAyM
 -H 'Origin: https://riot.im'
 -H 'DNT: 1'
 -H 'Connection: keep-alive' 
---data '{"name":"test3-room2","preset":"private_chat","visibility":"private","initial_state":[{"content":{"guest_access":"can_join"},"type":"m.room.guest_access","state_key":""}]}'
+--data '
+{
+  "name": "test3-room2",
+  "preset": "private_chat",
+  "visibility": "private",
+  "initial_state": [
+    {
+      "content": {
+        "guest_access": "can_join"
+      },
+      "type": "m.room.guest_access",
+      "state_key": ""
+    }
+  ]
+}
+'
 {
   "preset": "public_chat",
   "room_alias_name": "thepub",
@@ -65,4 +80,29 @@ curl 'https://matrix.fastcoin.ch/_matrix/client/r0/createRoom?access_token=MDAyM
       "m.federate": true
   }
 }
+```
+
+# Login
+```
+curl 'https://matrix.fastcoin.ch/_matrix/client/r0/login?'
+-H 'Host: matrix.fastcoin.ch'
+-H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0'
+-H 'Accept: */*'
+-H 'Accept-Language: en-US,en;q=0.5' --compressed
+-H 'Referer: https://riot.im/develop/'
+-H 'Content-Type: text/plain;charset=UTF-8'
+-H 'Origin: https://riot.im'
+-H 'DNT: 1'
+-H 'Connection: keep-alive' --data '
+{
+  "type": "m.login.password",
+  "password": "test-auto-25",
+  "identifier": {
+    "type": "m.id.user",
+    "user": "test-auto-25"
+  },
+  "initial_device_display_name": "https://riot.im/develop/ via Firefox on Linux",
+  "user": "test-auto-25"
+}
+'
 ```
