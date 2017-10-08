@@ -5,7 +5,7 @@ import urllib, math
 
 class UserLink:
     "Class in charge creating of users"
-    def __init__(self, homeserver="matrix.fastcoin.ch"):
+    def __init__(self, homeserver="communi.camp"):
         """
         Keyword arguments:
         homeserver -- the homeserver base address (ie. https://matrix.org")
@@ -158,7 +158,7 @@ class UserLink:
         return self
 
 class ScriptRoller:
-    def __init__(self, admin_user_link, homeserver="matrix.fastcoin.ch"):
+    def __init__(self, admin_user_link, homeserver="communi.camp"):
         if (homeserver.find("http") < 0):
             homeserver = "https://" + homeserver
         self.homeserver_url = homeserver
