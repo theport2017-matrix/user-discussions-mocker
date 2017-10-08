@@ -1,6 +1,0 @@
-@a Building 39 has a leaky roof, what could be done about it?
-@a I can try to do something but I'm affraid I don't have the necessary knowledge to do a good job tackling the problem alone.
-@b I met someone with carpentry knowledge yesterday, I can try to get in touch with him again.
-@b However, I'm pretty sure he has no tools with him.
-@a Thank you, that would be great.
-@c You could also ask in the #buildings room which coordinates the new construction effort at the south of the camp, they might be able to help or lend you tools.
